@@ -11,22 +11,26 @@
                 <h3>Editar producto</h3>
                 <section class="ultima-visita">
 
-                    <form action="/products/<%=  product.id %>?_method=PUT" method="POST" enctype="multipart/form-data" >
+                    <form action="/products/<%=product.id %>?_method=PUT" method="POST" enctype="multipart/form-data" >
+                        
 
+                                            
                         <div class="field">
                             <label for="name">Nombre</label>
                             <div class="control1">
 
-                                <input type="text" name="name" value="<%= product.name %>">
+                                <input type="text" name="name" value="<%=product.name %>">
+                               
                             </div>
 
                         </div>
 
-
-                        <div class="field">
+                       <div class="field">
                             <label for="image">Imagen</label>
                             <div class="control">
-                                <input type="file" name="image" value="<%= product.image %>" class="product_img">
+                                <input type="file" name="image" class="product_img">
+                                <input type="hidden" name="oldImage" value="<%= product.image %>">
+                               
                             </div>
                         </div>
 
@@ -34,6 +38,7 @@
                             <label for="price">Precio</label>
                             <div class="control2">
                                 <input type="text" name="price" value="<%= product.price %>">
+                             
                             </div>
                         </div>
 
@@ -41,7 +46,9 @@
                             <label for="descuento">descuento</label>
                             <div class="control3">
 
-                                <input type="text" name="descuento" value="<%= product.descuento  %>">
+                                <input type="text" name="descuento"  value="<%= product.descuento %>">
+                               
+                           
                             </div>
                         </div>
 

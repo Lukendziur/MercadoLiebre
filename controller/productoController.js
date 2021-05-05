@@ -1,3 +1,4 @@
+const {validationResult} = require('express-validator');
 
 // ESTO SERIA EL GESTOR DEL MODELO
 const jsonDB = require('../model/jsonDatabase');
@@ -34,6 +35,19 @@ let productController = {
     },
 // Función que simula el almacenamiento, en este caso en array
     store: (req, res) => {
+
+        //VALIDACIÓN DEL FORM
+        const resultValidation = validationResult(req);
+        if(resultValidation.errors.length > 0){
+            return res.render('createProduct', {
+                errors: resultValidation.mapped(),
+                oldData: req.body //Esto es para que no se vaya borrando lo que uno escribe
+            });
+        }
+
+
+
+        // ACCIÓN DE CREACIÓN
         console.log('Entre a store')
         console.log(req.files);
     
@@ -71,17 +85,18 @@ let productController = {
 
 // Función que realiza cambios en el producto seleccionado
     update: (req, res) => {
+
+
+        //ACCIÓN DE EDICIÓN
+        
         console.log("Entré al update")
         // Armo la estructura del registro auxiliar (product)
   
-        let  product = req.body;
-      
+        const product = req.body;      
  
         console.log(' soy la nueva: ' +req.body.image)
         console.log('soy la vieja '+ req.body.oldImage)
-        product.id = req.params.id;
-
-     
+        product.id = req.params.id;     
           product.image = req.file ? req.file.filename : req.body.oldImagen;
         
           if (req.body.image===undefined) {
@@ -98,10 +113,16 @@ let productController = {
 
 
         // Delego la responsabilidad al modelo que actualice
-        productModel.update(product);
-          
+        productModel.update(product);    
 
-        res.redirect('/')
+       
+            res.redirect('/')
+
+         
+          
+          
+          
+          
     },
 
 // Función que elimina del Array visitados ek producto seleccionado

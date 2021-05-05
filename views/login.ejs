@@ -1,52 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href='/css/styles.css' />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css">
-    <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed&display=swap" rel="stylesheet">
-    
-    
-    <title>Login</title>
-</head>
-<body>
-    <header>
-        <div class="contenedorLogo-cuotas-buscador">
+    <%- include('partials/head') %>
 
-            <div class="logoML">
-                <img src="/images/logo-mercado-liebre.svg" alt="Logo de MercadoLiebre"> 
-            </div>
-            
-            <div class="buscador">
-                <input type="text" placeholder="Buscar productos, marcas" name="search">
-                <button type="submit"><i class="fa fa-search"></i></button>
-            </div>
-       
-            <p id="cuotas"><i class="fas fa-hand-holding-usd"></i> Comprá en cuotas y sin tarjeta de crédito</p>
-        </div>
-        <nav> 
-            <ul>
-              <li><a href="#">Ofertas</a></li>
-              <li><a href="#">Tiendas Oficiales</a></li>
-              <li><a href="#">Vender</a></li>
-              <li><a href="#">Ayuda</a></li>
-            </ul>       
-       
-            <ul>
-              <li><a href="/register">Creá tu cuenta <i class="far fa-id-card"></i></a></li>
-              <li><a href="/login">Ingresá <i class="fas fa-sign-in-alt"></i></a></li>
-              <li><a href="#">Mis compras <i class="fas fa-shopping-basket"></i></a></li>
-            </ul>
-        </nav>
-          
-        
-        <div class="burger-menu">   
-        <i class = "fa fa-bars burger"></i></div>   
-        
-    </header>
+    <body>
+
+        <%- include('partials/header') %>
 
 
 <main class="login-main">

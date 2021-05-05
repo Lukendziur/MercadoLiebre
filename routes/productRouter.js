@@ -4,6 +4,7 @@ const router = express.Router()
 
 const controller = require('../controller/productoController');
 const multer = require('multer');
+const {body} = require('express-validator')
 const path = require('path');
 
 const storage = multer.diskStorage({
@@ -13,8 +14,38 @@ const storage = multer.diskStorage({
     }
 });
 
-
 const upload = multer({ storage });
+
+
+
+const validations = [
+    body('name').notEmpty().withMessage('Se requiere un nombre'),
+    body('price').notEmpty().withMessage('Se requiere un nombre de usuario'),
+    body('image').custom((value, { req }) =>{
+        let file = req.file;
+        let acceptedExtensions = ['.jpg', '.gif', '.png'];      
+        
+        if(!file){
+            throw new Error ('Tenés que subir una imagen');
+
+        }else{
+            let fileExtension = path.extname(file.originalname);
+            if (!acceptedExtensions.includes(fileExtension)){
+            throw new Error(`Las extensiones de archivo permitidas son  ${acceptedExtensions.join(', ')}`);
+        
+        }
+        
+    }
+    return true;
+    })
+  
+]
+
+
+
+
+
+
 // Formulario de creación de productos (GET)
 router.get('/cart', controller.cart);
 
@@ -33,9 +64,7 @@ router.get('/search', controller.search)
 router.get('/:id/edit', controller.edit);
 
 // Acción de creación (a donde se envía el formulario) (POST)
-
-// Acción de creación (a donde se envía el formulario) (POST)
-router.post('/store', upload.single('image'), controller.store);//image es el name del input del form//single = un solo archivo
+router.post('/store', upload.single('image'), validations, controller.store);//image es el name del input del form//single = un solo archivo
 
 // Acción de edición (a donde se envía el formulario) (PUT)
 router.put('/:id', upload.single('image'), controller.update);
