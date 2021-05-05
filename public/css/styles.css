@@ -203,6 +203,10 @@ main section article img{
 
 main section article i{
     color: #39b54a;
+    transition: all 420ms;
+}
+main section article i:hover{
+    transform: rotate(-90deg);
 }
 
 main section article i{

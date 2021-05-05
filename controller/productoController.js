@@ -8,8 +8,6 @@ const productModel = jsonDB('products');
 let productController = {
 
     home: (req, res) => {
-        console.log('entro al home del produt controller y redirijo')
-
         res.redirect('/')
 
     },
@@ -47,7 +45,7 @@ let productController = {
 
          // Verificar si viene un archivo, para nombrarlo  
          product.image = req.file ? req.file.filename : '';
-      
+      console.log('ACÁ ABAJO DEBERÍA APARECER LA IMAGEN');
         console.log(product.image)
 
     // Delego la responsabilidad al modelo para crear producto  

@@ -36,8 +36,6 @@ router.get('/:id/edit', controller.edit);
 
 // Acción de creación (a donde se envía el formulario) (POST)
 router.post('/store', upload.single('image'), controller.store);//image es el name del input del form//single = un solo archivo
-// advertir el segundo parámetro quense le avisa de 1 sólo archivo
-
 
 // Acción de edición (a donde se envía el formulario) (PUT)
 router.put('/:id', upload.single('image'), controller.update);

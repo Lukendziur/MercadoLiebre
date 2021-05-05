@@ -5,6 +5,8 @@ const methodOverride = require('method-override');
 
 const port = process.env.PORT
 
+const multer = require('multer');
+
 //Para indicarle express la carpeta donde se encuentran los archivos estáticos
 // Necesitamos indicarle a Express que todo lo que está en la capeta public
 // es contenido estático, es decir que no pasa por el sistema de rutas
