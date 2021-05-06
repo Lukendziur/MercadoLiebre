@@ -3,6 +3,7 @@ const {validationResult} = require('express-validator');
 // ESTO SERIA EL GESTOR DEL MODELO
 const jsonDB = require('../model/jsonDatabase');
 
+
 // Maneja todos los métodos para PRODUCTO, que lo pasa como parámetro
 const productModel = jsonDB('products');
 
@@ -72,6 +73,8 @@ let productController = {
 
 // FUnción que muestra el formulario de edición
     edit: (req, res) => {
+        
+
    // Delego al modelo que busque el producto     
         let product = productModel.find(req.params.id);
 
@@ -86,6 +89,18 @@ let productController = {
 // Función que realiza cambios en el producto seleccionado
     update: (req, res) => {
 
+
+
+        // VALIDACIÓN DEL FORM DE EDICIÓN
+        const resultValidation = validationResult(req);
+            let newProductValues = req.body;
+            newProductValues.id = req.params.id;
+            if (resultValidation.errors.length > 0) {
+            return res.render('editProduct', {
+                errors: resultValidation.mapped(),
+                oldData: newProductValues, product: newProductValues
+            });
+        }
 
         //ACCIÓN DE EDICIÓN
         

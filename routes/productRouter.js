@@ -7,6 +7,7 @@ const multer = require('multer');
 const {body} = require('express-validator')
 const path = require('path');
 
+
 const storage = multer.diskStorage({
     destination: path.resolve(__dirname, '../public/images'),
     filename: (req, file, cb) => {
@@ -14,7 +15,7 @@ const storage = multer.diskStorage({
     }
 });
 
-const upload = multer({ storage });
+
 
 
 
@@ -39,12 +40,17 @@ const validations = [
     return true;
     })
   
-]
+];
+
+const editValidations = [
+    body('name').notEmpty().withMessage('Debes completar con un nombre válido'),
+    body('price').notEmpty().withMessage('Debes completar con un precio válido').bail()
+    .isNumeric().withMessage('Debes completar con un número')
+    
+];
 
 
-
-
-
+const upload = multer({ storage });
 
 // Formulario de creación de productos (GET)
 router.get('/cart', controller.cart);
@@ -67,7 +73,7 @@ router.get('/:id/edit', controller.edit);
 router.post('/store', upload.single('image'), validations, controller.store);//image es el name del input del form//single = un solo archivo
 
 // Acción de edición (a donde se envía el formulario) (PUT)
-router.put('/:id', upload.single('image'), controller.update);
+router.put('/:id', upload.single('image'), editValidations, controller.update);
 
 // Acción de borrado (DELETE)
 router.delete('/:id', controller.destroy);

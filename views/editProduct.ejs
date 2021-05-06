@@ -7,6 +7,7 @@
 
         <%- include('partials/header') %>
 
+
             <main class="mainEdit">
                 <h3>Editar producto</h3>
                 <section class="ultima-visita">
@@ -20,6 +21,9 @@
                             <div class="control1">
 
                                 <input type="text" name="name" value="<%=product.name %>">
+                                <% if(locals.errors && errors.name){ %>
+                                    <div><%= errors.name.msg %></div>
+                                <% } %>
                                
                             </div>
 
@@ -28,8 +32,8 @@
                        <div class="field">
                             <label for="image">Imagen</label>
                             <div class="control">
-                                <input type="file" name="image" class="product_img">
-                                <input type="hidden" name="oldImage" value="<%= product.image %>">
+                                <input type="file" name="image" class="product_img" value="<%= product.image %>">
+                                <!-- <input type="hidden" name="oldImage" value="<%= product.image %>"> -->
                                
                             </div>
                         </div>
@@ -38,6 +42,9 @@
                             <label for="price">Precio</label>
                             <div class="control2">
                                 <input type="text" name="price" value="<%= product.price %>">
+                                <% if(locals.errors && errors.price){ %>
+                                    <div><%= errors.price.msg %></div>
+                                <% } %>
                              
                             </div>
                         </div>
