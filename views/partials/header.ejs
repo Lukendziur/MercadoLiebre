@@ -24,9 +24,24 @@
             </ul>       
        
             <ul>
-              <li><a href="/register">Creá tu cuenta <i class="far fa-id-card"></i></a></li>
-              <li><a href="/login">Ingresá <i class="fas fa-sign-in-alt"></i></a></li>
-            
+                <% if(locals.isLogged){  %> 
+
+                <li><a href="/user/profile">
+
+                    <img src="/images/avatars/<%= locals.userLogged.avatar %> " alt="imagen de perfil" width="40" style="border-radius: 100%;">
+                    
+                    Hi <%= locals.userLogged.name %>
+                </a></li>
+                <li><a href="/user/logout">Logout</a></li>
+
+
+                <% }else{ %>                             
+
+                
+
+              <li><a href="/user/register">Creá tu cuenta <i class="far fa-id-card"></i></a></li>
+              <li><a href="/user/login">Ingresá <i class="fas fa-sign-in-alt"></i></a></li>
+            <% } %> 
             </ul>
         </nav>
           

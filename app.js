@@ -1,15 +1,28 @@
 const express = require('express');
+const session = require('express-session');//instalé "npm install express-session" y ahora lo requiero
+const cookies = require('cookie-parser');
 const app = express();
+
 
 const methodOverride = require('method-override');
 
 const port = process.env.PORT
 
 const multer = require('multer');
+const userLoggedMiddleware = require('./middlewares/userLoggedMiddleware');
 
+
+app.use(cookies());
+
+
+
+app.use(session({secret: 'Secreto!!', resave: false,saveUninitialized : false })); //la hago global a toda mi app
 //Para indicarle express la carpeta donde se encuentran los archivos estáticos
 // Necesitamos indicarle a Express que todo lo que está en la capeta public
 // es contenido estático, es decir que no pasa por el sistema de rutas
+
+app.use(userLoggedMiddleware);
+
 app.use(express.static('public'));
 
 //Debemos indicar cual es el motor de plantillas que estamos usando EJS
@@ -31,7 +44,7 @@ const productRouter = require('./routes/productRouter');
 
 app.use('/', homeRouter);
 
-app.use('/', userRouter);
+app.use('/user', userRouter);
 // Recordar que el prefijo /products
 // antecede a todas las rutas del controlador correspondiente
 app.use('/products', productRouter);
